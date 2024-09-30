@@ -23,10 +23,17 @@ class DArray {
         enum type_assign {
             iadd_operator, imul_operator, idiv_operator
         };
+
+        enum type_increment{
+            inc_pref, inc_post, dec_pref, dec_post
+        };
+
         DArray *current{nullptr};
         int index{-1};
 
         int _assign_operator(int right, type_assign t);
+
+        int _increment_operator(type_increment t);
 
     public:
         Item(DArray *obj, int idx) : current(obj), index(idx) {}
@@ -41,6 +48,13 @@ class DArray {
 
         int operator/=(int right);
 
+        int operator++();
+
+        int operator--();
+
+        int operator++(int);
+
+        int operator--(int);
     };
 
 public:

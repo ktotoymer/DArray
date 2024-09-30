@@ -82,7 +82,7 @@ int DArray::Item::operator=(int right) {
 
     if (index >= current->capacity) current->_resize_array(index);
 
-    for (int i = current->length; i < index; ++i){
+    for (int i = current->length; i < index; ++i) {
         current->data[i] = 0;
     }
 
@@ -94,7 +94,7 @@ int DArray::Item::operator=(int right) {
     return right;
 }
 
-DArray::Item::operator int() const{
+DArray::Item::operator int() const {
     if (index < 0 || index >= current->length) return value_error;
 
     return current->data[index];
@@ -126,4 +126,43 @@ int DArray::Item::operator*=(int right) {
 
 int DArray::Item::operator/=(int right) {
     return _assign_operator(right, idiv_operator);;
+}
+
+int DArray::Item::operator++() {
+    return _increment_operator(inc_pref);
+}
+
+int DArray::Item::operator--() {
+    return _increment_operator(dec_pref);
+}
+
+int DArray::Item::operator++(int) {
+    return _increment_operator(inc_post);
+}
+
+int DArray::Item::operator--(int) {
+    return _increment_operator(dec_post);
+}
+
+int DArray::Item::_increment_operator(DArray::Item::type_increment t) {
+    if (index > current->length || index < 0) return value_error;
+
+    int value = current->data[index];
+
+    switch (t) {
+        case inc_pref:
+            current->data[index]++;
+            return current->data[index];
+        case dec_pref:
+            current->data[index]--;
+            return current->data[index];
+        case inc_post:
+            current->data[index]++;
+            return value;
+        case dec_post:
+            current->data[index]--;
+            return value;
+        default:
+            return value_error;
+    }
 }
