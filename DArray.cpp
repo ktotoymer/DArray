@@ -100,6 +100,15 @@ DArray::Item::operator int() const {
     return current->data[index];
 }
 
+DArray DArray::operator+(const DArray &other) {
+    int size_new = length + other.length;
+    if (size_new > max_length_array) size_new = max_length_array;
+    DArray arr_new = *this;
+    for (int i = arr_new.length, j = 0; i < size_new; i++, j++) arr_new.data[i] = other.data[j];
+    arr_new.length = size_new;
+    return arr_new;
+}
+
 int DArray::Item::_assign_operator(int right, DArray::Item::type_assign t) {
     if (index >= current->capacity || index < 0) return value_error;
     switch (t) {
@@ -165,4 +174,8 @@ int DArray::Item::_increment_operator(DArray::Item::type_increment t) {
         default:
             return value_error;
     }
+}
+
+DArray DArray::Item::operator+(const DArray &other) {
+    return DArray();
 }

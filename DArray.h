@@ -81,6 +81,8 @@ public:
 
     const DArray &operator=(const DArray &right);
 
+    DArray operator+(const DArray &other);
+
     const DArray &operator+=(const DArray &right);
 
     Item operator[](int index) {
