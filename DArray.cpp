@@ -63,6 +63,20 @@ int DArray::pop_back() {
     return value_error;
 }
 
+const DArray &DArray::operator+=(const DArray &right) {
+    int size_new = length + right.length;
+    if (size_new > max_length_array)
+        size_new = max_length_array;
+
+    _resize_array(size_new);
+
+    for (int i = length, j = 0; i < size_new; ++i, ++j)
+        data[i] = right.data[j];
+
+    length = size_new;
+    return *this;
+}
+
 int DArray::Item::operator=(int right) {
     if (index < 0 || index >= max_length_array) return right;
 
