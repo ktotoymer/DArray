@@ -3,4 +3,6 @@ project(DArray)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(DArray main.cpp)
+add_executable(DArray main.cpp
+        DArray.cpp
+        DArray.h)
