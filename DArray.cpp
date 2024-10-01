@@ -175,7 +175,3 @@ int DArray::Item::_increment_operator(DArray::Item::type_increment t) {
             return value_error;
     }
 }
-
-DArray DArray::Item::operator+(const DArray &other) {
-    return DArray();
-}
