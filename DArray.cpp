@@ -109,6 +109,18 @@ DArray DArray::operator+(const DArray &other) {
     return arr_new;
 }
 
+DArray &DArray::operator=(DArray &&right) {
+    if (this == &right) return *this;
+
+    delete[] data;
+    length = right.length;
+    capacity = right.capacity;
+    data = right.data;
+    right.data = nullptr;
+
+    return *this;
+}
+
 int DArray::Item::_assign_operator(int right, DArray::Item::type_assign t) {
     if (index >= current->capacity || index < 0) return value_error;
     switch (t) {

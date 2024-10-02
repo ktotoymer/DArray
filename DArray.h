@@ -24,7 +24,7 @@ class DArray {
             iadd_operator, imul_operator, idiv_operator
         };
 
-        enum type_increment{
+        enum type_increment {
             inc_pref, inc_post, dec_pref, dec_post
         };
 
@@ -69,6 +69,11 @@ public:
         }
     }
 
+    DArray(DArray &&move) noexcept: length(move.length), capacity(move.capacity) {
+        this->data = move.data;
+        move.data = nullptr;
+    }
+
     ~DArray() {
         delete[] data;
     }
@@ -80,6 +85,8 @@ public:
     const int *get_data() const;
 
     const DArray &operator=(const DArray &right);
+
+    DArray &operator=(DArray &&right);
 
     DArray operator+(const DArray &other);
 
